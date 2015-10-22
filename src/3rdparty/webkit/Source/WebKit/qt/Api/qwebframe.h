@@ -111,12 +111,18 @@ private:
 #ifndef QT_NO_PRINTER
 class QWEBKIT_EXPORT QWebPrinter {
 public:
+    enum VerticalPosition {Top, Center};
+    
     QWebPrinter(const QWebFrame * frame, QPaintDevice * printer, QPainter &painter);
     ~QWebPrinter();
     void spoolPage(int i) const;
     QPainter * painter();
     int pageCount() const;
-    QPair<int, QRectF> elementLocation(const QWebElement & e);
+    QPair<int, QRectF> elementLocation(const QWebElement & e
+#ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
+                                       , VerticalPosition vpos = Center
+#endif
+                                       );
 private:
     QWebPrinterPrivate * d;
 };
