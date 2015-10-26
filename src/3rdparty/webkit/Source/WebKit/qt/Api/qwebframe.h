@@ -118,11 +118,7 @@ public:
     void spoolPage(int i) const;
     QPainter * painter();
     int pageCount() const;
-    QPair<int, QRectF> elementLocation(const QWebElement & e
-#ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
-                                       , VerticalPosition vpos = Center
-#endif
-                                       );
+    QPair<int, QRectF> elementLocation(const QWebElement & e, VerticalPosition vpos = Center);
 private:
     QWebPrinterPrivate * d;
 };

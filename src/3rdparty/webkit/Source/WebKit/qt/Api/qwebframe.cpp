@@ -279,11 +279,7 @@ int QWebPrinter::pageCount() const
     return d->printContext.pageCount();
 }
 
-QPair<int, QRectF> QWebPrinter::elementLocation(const QWebElement & e
-#ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
-                                                , VerticalPosition vpos
-#endif
-                                                )
+QPair<int, QRectF> QWebPrinter::elementLocation(const QWebElement & e, VerticalPosition vpos)
 {
     //Compute a mapping from node to render object once and for all
     if (d->elementToRenderObject.empty())
@@ -307,11 +303,7 @@ QPair<int, QRectF> QWebPrinter::elementLocation(const QWebElement & e
     
     int low=0;
     int high=pageRects.size();
-    int c = r.y() + 
-#ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
-        vpos == Top ? 0 :
-#endif
-                r.height() / 2;
+    int c = r.y() + ((vpos == Top) ? 0 : r.height() / 2);
     while(low <= high) {
         int m = (low+high)/2;
         if(c < pageRects[m].y())
